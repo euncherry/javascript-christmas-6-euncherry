@@ -9,7 +9,10 @@ class MenuModel {
   }
 
   getMenuItem() {
-    return [this.#type, this.#name, this.#price];
+    return { type: this.#type, name: this.#name, price: this.#price };
+  }
+  getMenuName() {
+    return this.#name;
   }
 }
 

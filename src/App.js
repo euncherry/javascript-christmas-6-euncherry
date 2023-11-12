@@ -19,6 +19,7 @@ class App {
 
   async makeReservation() {
     await this.#eventPlanner.setUserInput('date');
+    await this.#eventPlanner.setUserInput('menu');
   }
 }
 

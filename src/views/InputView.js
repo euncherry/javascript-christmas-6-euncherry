@@ -24,8 +24,21 @@ const InputView = {
     }
   },
 
+  async validationMenuInput(menuArray) {
+    while (true) {
+      try {
+        const userInput = await this.readMenu();
+        validation.orderMenuInput(userInput, menuArray);
+        return userInput;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  },
+
   async handleUserInput(inputType, ...menuArray) {
     if (inputType === 'date') return this.validationDateInput();
+    if (inputType === 'menu') return this.validationMenuInput(...menuArray);
   },
 };
 

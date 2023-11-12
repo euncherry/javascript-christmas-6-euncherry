@@ -37,6 +37,12 @@ class EventPlannerController {
     if (inputType === 'date') {
       this.#visitDate = await InputView.handleUserInput('date');
     }
+    if (inputType === 'menu') {
+      this.#orderMenu = await InputView.handleUserInput(
+        'menu',
+        this.#menuArray
+      );
+    }
   }
 
   getVisitDate() {
