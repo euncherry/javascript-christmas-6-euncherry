@@ -1,20 +1,55 @@
 import MenuModel from '../models/menuModel.js';
 import { MENU_LIST } from '../util/constant/index.js';
+import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
 
 class EventPlannerController {
-  #menuList;
+  #menuList = [];
+  #menuArray = [];
+  #visitDate = null;
+  #orderMenu = null;
+
   constructor() {
-    this.#menuList = MENU_LIST.map((menuItem) => this.setMenuList(menuItem));
+    this.#menuList = MENU_LIST.map(
+      (menu) => new MenuModel(menu.type, menu.name, menu.price)
+    );
+    this.#menuArray = this.#menuList.map((menu) => menu.getMenuItem());
   }
-  setMenuList(menuItem) {
-    const { type, name, price } = menuItem;
-    return new MenuModel(type, name, price);
-  }
-
   getMenuList() {
-    this.#menuList.forEach((v) => console.log(v.getMenuItem()));
-
+    console.log(this.#menuArray);
+    console.log(this.getMenuListSortName());
     return this.#menuList;
+  }
+
+  getMenuListSortName() {
+    const menuListSortName = {};
+
+    this.#menuList.forEach((menu) => {
+      menuListSortName[menu.getMenuItem().name] = {
+        type: menu.getMenuItem().type,
+        price: menu.getMenuItem().price,
+      };
+    });
+    return menuListSortName;
+  }
+
+  async setUserInput(inputType) {
+    if (inputType === 'date') {
+      this.#visitDate = await InputView.handleUserInput('date');
+    }
+  }
+
+  getVisitDate() {
+    return this.#visitDate;
+  }
+
+  printNotifyMessage(type) {
+    switch (type) {
+      case 'welcome':
+        return OutputView.printWelcome();
+      case 'previewMessage':
+        return OutputView.printPreviewMessage(this.#visitDate);
+    }
   }
 }
 export default EventPlannerController;

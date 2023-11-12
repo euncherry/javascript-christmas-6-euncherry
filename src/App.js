@@ -1,12 +1,24 @@
 import EventPlannerController from './controllers/EventPlannerController.js';
 
 class App {
+  #eventPlanner;
+
   constructor() {
-    this.EventPlannerController = new EventPlannerController();
+    this.#eventPlanner = new EventPlannerController();
   }
 
   async run() {
-    this.EventPlannerController.getMenuList();
+    this.#eventPlanner.getMenuList();
+
+    this.#eventPlanner.printNotifyMessage('welcome');
+
+    await this.makeReservation();
+
+    this.#eventPlanner.printNotifyMessage('previewMessage');
+  }
+
+  async makeReservation() {
+    await this.#eventPlanner.setUserInput('date');
   }
 }
 
