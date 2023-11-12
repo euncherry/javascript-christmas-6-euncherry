@@ -1,5 +1,13 @@
+import EventPlannerController from './controllers/EventPlannerController.js';
+
 class App {
-  async run() {}
+  constructor() {
+    this.EventPlannerController = new EventPlannerController();
+  }
+
+  async run() {
+    this.EventPlannerController.getMenuList();
+  }
 }
 
 export default App;
