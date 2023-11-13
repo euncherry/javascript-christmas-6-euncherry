@@ -1,12 +1,12 @@
-class MenuModel {
+class Menu {
   #type;
   // #name;
   #price;
+
   constructor(type, name, price) {
     this.#type = type;
-    // this.#name = name;
     this.name = name;
-    this.#price = price;
+    this.#price = Number(price);
   }
 
   getMenuItem() {
@@ -20,6 +20,10 @@ class MenuModel {
   getMenuPrice() {
     return this.#price;
   }
+
+  getMenuType() {
+    return this.#type;
+  }
 }
 
-export default MenuModel;
+export default Menu;

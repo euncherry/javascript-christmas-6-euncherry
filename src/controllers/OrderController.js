@@ -1,4 +1,4 @@
-import OrderModel from '../models/orderModel.js';
+import Order from '../models/Order.js';
 
 class OrderController {
   #menuController;
@@ -17,7 +17,7 @@ class OrderController {
     return orderMenu.map((menu) => {
       const [orderName, orderCount] = menu;
       const menuItem = this.#menuController.findMenuItemByName(orderName);
-      return new OrderModel(menuItem, Number(orderCount));
+      return new Order(menuItem, Number(orderCount));
     });
   }
 

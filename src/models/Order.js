@@ -1,4 +1,4 @@
-class OrderModel {
+class Order {
   #orderMenu;
   #orderCount;
   constructor(orderMenu, orderCount) {
@@ -11,4 +11,4 @@ class OrderModel {
   }
 }
 
-export default OrderModel;
+export default Order;

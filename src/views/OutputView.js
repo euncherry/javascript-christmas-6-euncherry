@@ -1,4 +1,4 @@
-import { OUTPUT_PRINT } from '../util/constant/index.js';
+import { OUTPUT_PRINT, BENEFIT_EVENT_DETAIL } from '../util/constant/index.js';
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
@@ -17,15 +17,21 @@ const OutputView = {
     const [MONTH, MESSAGE] = OUTPUT_PRINT.PREVIEW_MESSAGE;
     Console.print(MONTH + `${visitDate}` + MESSAGE);
   },
-  printTotalPriceBeforeDiscount(price) {
-    Console.print(OUTPUT_PRINT.TOTAL_PRICE_BEFORE_DISCOUNT_TITLE);
-    this.printPrice(price);
-  },
 
   printPrice(price) {
     const formatPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     Console.print(`${formatPrice}` + '원');
   },
+
+  printTotalPriceBeforeDiscount(price) {
+    Console.print(OUTPUT_PRINT.TOTAL_PRICE_BEFORE_DISCOUNT_TITLE);
+    this.printPrice(price);
+  },
+
+  printGiftMenuTitle() {
+    Console.print(OUTPUT_PRINT.GIFT_MENU_TITLE);
+  },
+
   // ...
 };
 

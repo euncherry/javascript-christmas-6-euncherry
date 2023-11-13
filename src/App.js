@@ -1,12 +1,14 @@
 import EventPlannerController from './controllers/EventPlannerController.js';
 import MenuController from './controllers/MenuController.js';
-import ViewController from './controllers/ViewController.js';
+import UserInterfaceController from './controllers/UserInterfaceController.js';
 import OrderController from './controllers/OrderController.js';
+import EventController from './controllers/EventController.js';
 
 class App {
   #eventPlanner;
   #menuController;
   #orderController;
+  #eventController;
 
   constructor() {
     // this.#eventPlanner = new EventPlannerController();
@@ -16,35 +18,39 @@ class App {
   async run() {
     this.getMenuList();
 
-    ViewController.printWelcome();
+    UserInterfaceController.printWelcome();
 
     this.#orderController = await this.makeReservation();
 
     const visitDate = this.#orderController.getVisitDate();
-    const orderList = this.#orderController.getOrderMenuArray();
-
-    ViewController.printPreviewMessage(visitDate);
+    const orderListArray = this.#orderController.getOrderMenuArray();
 
     console.log(visitDate);
-    console.log(orderList);
+    console.log('orderListArray\n', orderListArray);
 
-    this.#eventPlanner = new EventPlannerController(visitDate, orderList);
+    this.#eventPlanner = new EventPlannerController(orderListArray);
+
+    this.#eventPlanner.orderPreview(visitDate);
+
+    const orderTotalPrice = this.#eventPlanner.getOrderTotalPrice();
+
+    this.#eventController = new EventController(
+      visitDate,
+      orderListArray,
+      orderTotalPrice,
+      this.#menuController.findMenuItemByName('샴페인'),
+    );
+
+    this.#eventController.getMe();
   }
 
   async makeReservation() {
-    const visitDate = await ViewController.setDateInput();
-    const orderMenu = await ViewController.setMenuInput(
-      this.#menuController.getMenuArray()
+    const visitDate = await UserInterfaceController.setDateInput();
+    const orderMenu = await UserInterfaceController.setMenuInput(
+      this.#menuController.getMenuArray(),
     );
 
     return new OrderController(this.#menuController, visitDate, orderMenu);
-  }
-
-  orderPreview(orderList, orderTotalPrice) {
-    const orderMenu = this.#eventPlanner.calculateOrderMenu(orderList);
-    ViewController.printPreview(orderMenu, orderTotalPrice);
-
-    console.log('할인 전 총 주문 금액', orderTotalPrice);
   }
 
   getMenuList() {
