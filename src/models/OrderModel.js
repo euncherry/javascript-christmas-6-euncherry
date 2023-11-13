@@ -10,3 +10,5 @@ class OrderModel {
     return { menu: this.#orderMenu, count: this.#orderCount };
   }
 }
+
+export default OrderModel;
