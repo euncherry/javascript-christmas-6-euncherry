@@ -3,11 +3,13 @@ import MenuList from '../models/MenuList.js';
 import OrderListManager from '../models/OrderListManager.js';
 import EventManager from '../models/EventManager.js';
 import { InputView, OutputView } from '../views/index.js';
+import BadgeGenerator from '../models/BadgeGenerator.js';
 
 class EventPlannerController {
   #menuList;
   #orderListManager;
   #eventManager;
+  #badgeGenerator;
 
   constructor() {
     this.initialize();
@@ -111,6 +113,15 @@ class EventPlannerController {
     this.printFinalExpectPrice();
   }
 
+  createBadge() {
+    const totalBenefitsAmountResult = this.#eventManager.calculateTotalBenefits();
+    this.#badgeGenerator = new BadgeGenerator(totalBenefitsAmountResult);
+  }
+  printBadge() {
+    const eventBadge = this.#badgeGenerator.getBadge();
+    OutputView.printEventBadge(eventBadge);
+  }
+
   async start() {
     OutputView.printWelcome();
 
@@ -121,6 +132,9 @@ class EventPlannerController {
     this.printPreviewMessage();
     this.printPreOrderPreview();
     this.printEventBenefitPreview();
+
+    this.createBadge();
+    this.printBadge();
   }
 
   getMenuManager() {
