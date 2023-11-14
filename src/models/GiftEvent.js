@@ -1,16 +1,16 @@
 import { GIFT_EVENT } from '../util/constant/index.js';
 
 class GiftEvent {
-  #isGiftEvent;
+  #isEvent;
   #gift;
 
   constructor(visitDate, orderTotalPrice, giftMenu) {
-    this.#isGiftEvent = this.setIsGiftEvent(visitDate, orderTotalPrice);
-    this.#gift = this.#isGiftEvent ? giftMenu : null;
+    this.#isEvent = this.setIsEvent(visitDate, orderTotalPrice);
+    this.#gift = this.#isEvent ? giftMenu : null;
     this.orderTotalPrice = orderTotalPrice;
   }
 
-  setIsGiftEvent(visitDate, orderTotalPrice) {
+  setIsEvent(visitDate, orderTotalPrice) {
     if (visitDate < GIFT_EVENT.START_DATE || visitDate > GIFT_EVENT.END_DATE) {
       return false;
     }
@@ -20,15 +20,15 @@ class GiftEvent {
     return true;
   }
 
-  getIsGiftEvent() {
-    return this.#isGiftEvent;
+  isEventActive() {
+    return this.#isEvent;
   }
 
   getGiftMenu() {
-    return this.#gift ? this.#gift.getMenuName() : null;
+    return this.#gift ? this.#gift.getName() : null;
   }
   getDiscountPrice() {
-    return this.#gift ? this.#gift.getMenuPrice() : 0;
+    return this.#gift ? this.#gift.getPrice() : 0;
   }
 }
 export default GiftEvent;

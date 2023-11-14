@@ -1,18 +1,18 @@
 import { D_DAY_EVENT } from '../util/constant/index.js';
 
 class ChristmasDdayEvent {
-  #isChristmasDdayEvent;
+  #isEvent;
   #discountPrice;
 
   /**
    * @param {number} visitDate 예약한 방문날짜
    */
   constructor(visitDate, orderTotalPrice) {
-    this.#isChristmasDdayEvent = this.setIsChristmasDdayEvent(visitDate, orderTotalPrice);
+    this.#isEvent = this.setIsEvent(visitDate, orderTotalPrice);
     this.#discountPrice = this.setDiscount(visitDate);
   }
 
-  setIsChristmasDdayEvent(visitDate, orderTotalPrice) {
+  setIsEvent(visitDate, orderTotalPrice) {
     if (visitDate < D_DAY_EVENT.START_DATE || visitDate > D_DAY_EVENT.END_DATE) {
       return false;
     }
@@ -23,15 +23,15 @@ class ChristmasDdayEvent {
   }
 
   setDiscount(visitDate) {
-    if (this.#isChristmasDdayEvent) {
+    if (this.#isEvent) {
       let additionalDiscount = D_DAY_EVENT.DISCOUNT_ADDITIONAL_PRICE * (visitDate - 1);
       return additionalDiscount + D_DAY_EVENT.DISCOUNT_STANDARD_PRICE;
     }
     return 0;
   }
 
-  getIsChristmasDdayEvent() {
-    return this.#isChristmasDdayEvent;
+  isEventActive() {
+    return this.#isEvent;
   }
 
   getDiscountPrice() {

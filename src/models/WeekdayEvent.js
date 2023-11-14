@@ -1,11 +1,11 @@
 import { WEEKDAY_EVENT } from '../util/constant/index.js';
 
 class WeekdayEvent {
-  #isWeekdayEvent;
+  #isEvent;
   #discountPrice;
 
   constructor(visitDate, orderList, orderTotalPrice) {
-    this.#isWeekdayEvent = this.setIsWeekdayEvent(visitDate, orderTotalPrice);
+    this.#isEvent = this.setIsEvent(visitDate, orderTotalPrice);
     this.#discountPrice = this.setDiscountPrice(orderList);
   }
 
@@ -15,7 +15,7 @@ class WeekdayEvent {
     return WEEKDAY_EVENT.WEEKDAY_NUMBERS.includes(dayOfWeek);
   }
 
-  setIsWeekdayEvent(visitDate, orderTotalPrice) {
+  setIsEvent(visitDate, orderTotalPrice) {
     if (visitDate < WEEKDAY_EVENT.START_DATE || visitDate > WEEKDAY_EVENT.END_DATE) {
       return false;
     }
@@ -26,9 +26,9 @@ class WeekdayEvent {
   }
 
   setDiscountPrice(orderList) {
-    if (!this.#isWeekdayEvent) return 0;
+    if (!this.#isEvent) return 0;
     const discountMenuCount = orderList.reduce((acc, order) => {
-      if (order.menu.getMenuType() === WEEKDAY_EVENT.DISCOUNT_MENU_TYPE) {
+      if (order.menu.getType() === WEEKDAY_EVENT.DISCOUNT_MENU_TYPE) {
         return acc + order.count;
       }
       return acc;
@@ -36,8 +36,8 @@ class WeekdayEvent {
     return discountMenuCount * WEEKDAY_EVENT.DISCOUNT_PRICE;
   }
 
-  getIsWeekdayEvent() {
-    return this.#isWeekdayEvent;
+  isEventActive() {
+    return this.#isEvent;
   }
 
   getDiscountPrice() {

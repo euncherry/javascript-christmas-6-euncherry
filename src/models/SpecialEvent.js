@@ -3,24 +3,22 @@ import { SPECIAL_EVENT } from '../util/constant/index.js';
 class SpecialEvent {
   #specialDays = SPECIAL_EVENT.STAR_DAY;
   #discountPrice;
-  #isSpecialEvent;
+  #isEvent;
 
   constructor(visitDate, orderTotalPrice) {
-    this.#isSpecialEvent = this.setIsSpecialEvent(visitDate, orderTotalPrice);
-    this.#discountPrice = this.#isSpecialEvent
-      ? SPECIAL_EVENT.DISCOUNT_PRICE
-      : 0;
+    this.#isEvent = this.setIsEvent(visitDate, orderTotalPrice);
+    this.#discountPrice = this.#isEvent ? SPECIAL_EVENT.DISCOUNT_PRICE : 0;
   }
 
-  setIsSpecialEvent(visitDate, orderTotalPrice) {
+  setIsEvent(visitDate, orderTotalPrice) {
     const isSpecialDay = this.#specialDays.includes(visitDate);
     const hasMinimumPrice = orderTotalPrice >= 10000;
 
     return isSpecialDay && hasMinimumPrice;
   }
 
-  getIsSpecialEvent() {
-    return this.#isSpecialEvent;
+  isEventActive() {
+    return this.#isEvent;
   }
 
   getDiscountPrice() {
