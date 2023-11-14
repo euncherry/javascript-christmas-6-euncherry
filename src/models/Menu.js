@@ -9,19 +9,19 @@ class Menu {
     this.#price = Number(price);
   }
 
-  getMenuItem() {
+  getDetails() {
     // return { type: this.#type, name: this.#name, price: this.#price };
     return { type: this.#type, name: this.name, price: this.#price };
   }
-  getMenuName() {
+  getName() {
     // return this.#name;
     return this.name;
   }
-  getMenuPrice() {
+  getPrice() {
     return this.#price;
   }
 
-  getMenuType() {
+  getType() {
     return this.#type;
   }
 }

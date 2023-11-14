@@ -17,7 +17,7 @@ const InputView = {
       try {
         const userInput = await this.readDate();
         validation.visitDateInput(userInput);
-        return userInput;
+        return Number(userInput);
       } catch (error) {
         Console.print(error.message);
       }

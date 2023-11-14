@@ -1,16 +1,16 @@
-const MENU_LIST = [
-  { type: '애피타이저', name: '양송이수프', price: '6000' },
-  { type: '애피타이저', name: '타파스', price: '5500' },
-  { type: '애피타이저', name: '시저샐러드', price: '8000' },
-  { type: '메인', name: '티본스테이크', price: '55000' },
-  { type: '메인', name: '바비큐립', price: '54000' },
-  { type: '메인', name: '해산물파스타', price: '35000' },
-  { type: '메인', name: '크리스마스파스타', price: '25000' },
-  { type: '디저트', name: '초코케이크', price: '15000' },
-  { type: '디저트', name: '아이스크림', price: '5000' },
-  { type: '음료', name: '제로콜라', price: '3000' },
-  { type: '음료', name: '레드와인', price: '60000' },
-  { type: '음료', name: '샴페인', price: '25000' },
+const MENU_ITEMS = [
+  { type: '애피타이저', name: '양송이수프', price: 6000 },
+  { type: '애피타이저', name: '타파스', price: 5500 },
+  { type: '애피타이저', name: '시저샐러드', price: 8000 },
+  { type: '메인', name: '티본스테이크', price: 55000 },
+  { type: '메인', name: '바비큐립', price: 54000 },
+  { type: '메인', name: '해산물파스타', price: 35000 },
+  { type: '메인', name: '크리스마스파스타', price: 25000 },
+  { type: '디저트', name: '초코케이크', price: 15000 },
+  { type: '디저트', name: '아이스크림', price: 5000 },
+  { type: '음료', name: '제로콜라', price: 3000 },
+  { type: '음료', name: '레드와인', price: 60000 },
+  { type: '음료', name: '샴페인', price: 25000 },
 ];
 
 const INPUT_QUERY = {
@@ -26,19 +26,23 @@ const ERROR_MESSAGE = {
 
 const OUTPUT_PRINT = {
   WELCOME_MESSAGE: '안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.',
-  PREVIEW_MESSAGE: ['12월 ', '일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n'],
+  PREVIEW_MESSAGE: ['12월 ', '일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!'],
   ORDER_MENU_TITLE: '<주문 메뉴>',
   TOTAL_PRICE_BEFORE_DISCOUNT_TITLE: '<할인 전 총주문 금액>',
   GIFT_MENU_TITLE: '<증정 메뉴>',
   BENEFIT_EVENT_DETAIL_TITLE: '<혜택 내역>',
+  TOTAL_BENEFITS_AMOUNT_TITLE: '<총혜택 금액>',
+  FINAL_EXPECT_PRICE_TITLE: '<할인 후 예상 결제 금액>',
+  EVENT_BADGE_TITLE: '<12월 이벤트 배지>',
+  NO_DATA: '없음',
 };
 
-const BENEFIT_EVENT_DETAIL = {
-  CHRISTMAS_DDAY_DISCOUNT: '크리스마스 디데이 할인: ',
-  WEEKDAY_DISCOUNT: '평일 할인: ',
-  WEEKEND_DISCOUNT: '주말 할인: ',
-  SPECIAL_DISCOUNT: '특별 할인: ',
-  GIFT_DISCOUNT: '증정 이벤트: ',
+const BENEFIT_EVENT_NAME = {
+  CHRISTMAS_DDAY: '크리스마스 디데이 할인: ',
+  WEEKDAY: '평일 할인: ',
+  WEEKEND: '주말 할인: ',
+  SPECIAL: '특별 할인: ',
+  GIFT: '증정 이벤트: ',
 };
 
 const D_DAY_EVENT = {
@@ -83,15 +87,22 @@ const SPECIAL_EVENT = {
   MIN_EVENT_TOTAL_PRICE: 10000,
 };
 
+const BADGE_INFO = [
+  { name: '별', price: 5000 },
+  { name: '트리', price: 10000 },
+  { name: '산타', price: 20000 },
+];
+
 export {
-  MENU_LIST,
+  MENU_ITEMS,
   INPUT_QUERY,
   ERROR_MESSAGE,
   OUTPUT_PRINT,
-  BENEFIT_EVENT_DETAIL,
+  BENEFIT_EVENT_NAME,
   D_DAY_EVENT,
   GIFT_EVENT,
   WEEKDAY_EVENT,
   WEEKEND_EVENT,
   SPECIAL_EVENT,
+  BADGE_INFO,
 };
