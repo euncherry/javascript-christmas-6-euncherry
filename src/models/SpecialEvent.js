@@ -20,6 +20,9 @@ class SpecialEvent {
   isEventActive() {
     return this.#isEvent;
   }
+  getName() {
+    return 'SpecialEvent';
+  }
 
   getDiscountPrice() {
     return this.#discountPrice;

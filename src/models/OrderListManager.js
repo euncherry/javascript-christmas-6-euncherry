@@ -26,6 +26,10 @@ class OrderListManager {
       });
   }
 
+  getMenuList() {
+    return this.#menuList;
+  }
+
   getVisitDate() {
     return this.#visitDate;
   }

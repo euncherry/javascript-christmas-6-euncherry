@@ -30,6 +30,10 @@ class ChristmasDdayEvent {
     return 0;
   }
 
+  getName() {
+    return 'ChristmasDdayEvent';
+  }
+
   isEventActive() {
     return this.#isEvent;
   }

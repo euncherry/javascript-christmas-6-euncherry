@@ -24,6 +24,10 @@ class GiftEvent {
     return this.#isEvent;
   }
 
+  getName() {
+    return 'GiftEvent';
+  }
+
   getGiftMenu() {
     return this.#gift ? this.#gift.getName() : null;
   }

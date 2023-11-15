@@ -40,6 +40,10 @@ class WeekendEvent {
     return discountMenuCount * WEEKEND_EVENT.DISCOUNT_PRICE;
   }
 
+  getName() {
+    return 'WeekendEvent';
+  }
+
   isEventActive() {
     return this.#isEvent;
   }
