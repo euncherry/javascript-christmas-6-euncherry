@@ -28,7 +28,6 @@ class App {
   }
 
   async run() {
-    this.getMenuManager();
     OutputView.printEventAttentionMessage();
     OutputView.printWelcome();
     const { orderDate, orderMenu } = await this.userPreOrderInput();
@@ -44,13 +43,6 @@ class App {
     );
 
     this.#eventPlannerController.start();
-  }
-
-  getMenuManager() {
-    console.log(this.#menuList.getMenus());
-    console.log(this.#menuList.getMenusArray());
-
-    return this.#menuList;
   }
 }
 

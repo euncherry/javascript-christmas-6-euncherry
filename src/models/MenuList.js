@@ -18,19 +18,6 @@ class MenuList {
     return this.#menus.map((menu) => menu.getDetails());
   }
 
-  getMenuListSortedByName() {
-    const menuListSortedByName = {};
-
-    this.#menus.forEach((menu) => {
-      menuListSortedByName[menu.getName()] = {
-        type: menu.getType(),
-        price: menu.getPrice(),
-      };
-    });
-
-    return menuListSortedByName;
-  }
-
   findMenuByName(menuName) {
     return this.#menus.find((menu) => menu.getName() === menuName);
   }

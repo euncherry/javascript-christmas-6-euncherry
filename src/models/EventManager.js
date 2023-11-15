@@ -62,20 +62,6 @@ class EventManager {
   #getEventByName(eventName) {
     return this.#events.find((event) => event.getName() === eventName);
   }
-
-  getMe() {
-    console.log('증정 메뉴 계산 메소드', this.calculateGiftMenu());
-    console.log(
-      '혜택받은 이벤트가 존재하는지 확인하는 메소드',
-      this.calculateIsEventsActive(),
-    );
-    console.log('혜택 내역 계산 메소드', this.calculateBenefits());
-    console.log('총 혜택 금액 계산 메소드', this.calculateTotalBenefits());
-    console.log(
-      '할인 후 예상 결제 금액 계산 메소드',
-      this.calculateDiscountedPayment(142000),
-    );
-  }
 }
 
 export default EventManager;
