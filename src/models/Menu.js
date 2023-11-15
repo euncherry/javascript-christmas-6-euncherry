@@ -1,22 +1,24 @@
 class Menu {
   #type;
-  // #name;
+
+  #name;
+
   #price;
 
   constructor(type, name, price) {
     this.#type = type;
-    this.name = name;
+    this.#name = name;
     this.#price = Number(price);
   }
 
   getDetails() {
-    // return { type: this.#type, name: this.#name, price: this.#price };
-    return { type: this.#type, name: this.name, price: this.#price };
+    return { type: this.#type, name: this.#name, price: this.#price };
   }
+
   getName() {
-    // return this.#name;
-    return this.name;
+    return this.#name;
   }
+
   getPrice() {
     return this.#price;
   }

@@ -11,19 +11,18 @@ class EventManager {
   constructor(orderListManager, giftMenuName) {
     const visitDate = orderListManager.getVisitDate();
     const orderList = orderListManager.getOrdersArray();
-    const orderTotalPrice = orderListManager.calculateOrderTotalPrice();
     const giftMenu = orderListManager.getMenuList().findMenuByName(giftMenuName);
+    this.#originalTotalPrice = orderListManager.calculateOrderTotalPrice();
 
-    this.initialize(visitDate, orderList, orderTotalPrice, giftMenu);
+    this.initialize(visitDate, orderList, giftMenu);
   }
 
-  initialize(visitDate, orderList, orderTotalPrice, giftMenu) {
-    this.#originalTotalPrice = orderTotalPrice;
-    this.#events.push(new GiftEvent(visitDate, orderTotalPrice, giftMenu));
-    this.#events.push(new ChristmasDdayEvent(visitDate, orderTotalPrice));
-    this.#events.push(new WeekdayEvent(visitDate, orderList, orderTotalPrice));
-    this.#events.push(new WeekendEvent(visitDate, orderList, orderTotalPrice));
-    this.#events.push(new SpecialEvent(visitDate, orderTotalPrice));
+  initialize(visitDate, orderList, giftMenu) {
+    this.#events.push(new GiftEvent(visitDate, this.#originalTotalPrice, giftMenu));
+    this.#events.push(new ChristmasDdayEvent(visitDate, this.#originalTotalPrice));
+    this.#events.push(new WeekdayEvent(visitDate, orderList, this.#originalTotalPrice));
+    this.#events.push(new WeekendEvent(visitDate, orderList, this.#originalTotalPrice));
+    this.#events.push(new SpecialEvent(visitDate, this.#originalTotalPrice));
   }
 
   // 증정 메뉴 계산 메소드
@@ -35,8 +34,11 @@ class EventManager {
   // 혜택 내역 계산 메소드
   calculateBenefits() {
     return this.#events.reduce((benefits, event) => {
-      benefits[event.getName()] = event.getDiscountPrice();
-      return benefits;
+      const updatedBenefits = {
+        ...benefits,
+        [event.getName()]: event.getDiscountPrice(),
+      };
+      return updatedBenefits;
     }, {});
   }
 

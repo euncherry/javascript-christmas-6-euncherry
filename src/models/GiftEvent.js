@@ -2,6 +2,7 @@ import { GIFT_EVENT } from '../util/constant/index.js';
 
 class GiftEvent {
   #isEvent;
+
   #gift;
 
   constructor(visitDate, orderTotalPrice, giftMenu) {
@@ -31,6 +32,7 @@ class GiftEvent {
   getGiftMenu() {
     return this.#gift ? this.#gift.getName() : null;
   }
+
   getDiscountPrice() {
     return this.#gift ? this.#gift.getPrice() : 0;
   }

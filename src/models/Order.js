@@ -1,6 +1,8 @@
 class Order {
   #menu;
+
   #count;
+
   constructor(orderMenu, orderCount) {
     this.#menu = orderMenu;
     this.#count = orderCount;

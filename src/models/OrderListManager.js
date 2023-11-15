@@ -55,14 +55,18 @@ class OrderListManager {
   calculateOrderTotalPrice() {
     const orderListArray = this.getOrdersArray();
 
-    let OrderTotalPrice = orderListArray.reduce((totalPrice, order) => {
+    const orderTotalPrice = orderListArray.reduce((totalPrice, order) => {
       const menuPrice = order.menu.getPrice();
       const menuCount = order.count;
 
-      return (totalPrice += menuPrice * menuCount);
+      return totalPrice + this.calculateMenuTotalPrice(menuPrice, menuCount);
     }, 0);
 
-    return OrderTotalPrice;
+    return orderTotalPrice;
+  }
+
+  calculateMenuTotalPrice(menuPrice, menuCount) {
+    return menuPrice * menuCount;
   }
 }
 

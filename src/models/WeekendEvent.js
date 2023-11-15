@@ -2,6 +2,7 @@ import { WEEKEND_EVENT } from '../util/constant/index.js';
 
 class WeekendEvent {
   #isEvent;
+
   #discountPrice;
 
   constructor(visitDate, orderList, orderTotalPrice) {

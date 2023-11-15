@@ -2,7 +2,9 @@ import { SPECIAL_EVENT } from '../util/constant/index.js';
 
 class SpecialEvent {
   #specialDays = SPECIAL_EVENT.STAR_DAY;
+
   #discountPrice;
+
   #isEvent;
 
   constructor(visitDate, orderTotalPrice) {
@@ -20,6 +22,7 @@ class SpecialEvent {
   isEventActive() {
     return this.#isEvent;
   }
+
   getName() {
     return 'SpecialEvent';
   }
