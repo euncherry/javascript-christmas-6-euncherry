@@ -1,4 +1,8 @@
-import { OUTPUT_PRINT, BENEFIT_EVENT_NAME } from '../util/constant/index.js';
+import {
+  OUTPUT_PRINT,
+  BENEFIT_EVENT_NAME,
+  ATTENTION_MESSAGE,
+} from '../util/constant/index.js';
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
@@ -6,8 +10,16 @@ const OutputView = {
     Console.print(OUTPUT_PRINT.WELCOME_MESSAGE);
   },
 
+  printEventAttentionMessage() {
+    Console.print('\n' + ATTENTION_MESSAGE.TITLE);
+    Console.print(ATTENTION_MESSAGE.MINIMUM_EVENT_AMOUNT);
+    Console.print(ATTENTION_MESSAGE.DRINK_ONLY_ORDER);
+    Console.print(ATTENTION_MESSAGE.MAXIMUM_ORDER_LIMIT + '\n');
+  },
+
   printMenu(orderMenu) {
     Console.print('\n' + OUTPUT_PRINT.ORDER_MENU_TITLE);
+
     orderMenu.forEach(([menuName, menuCount]) => {
       Console.print(`${menuName} ${menuCount}개`);
     });
@@ -15,12 +27,8 @@ const OutputView = {
 
   printPreviewMessage(visitDate) {
     const [MONTH, MESSAGE] = OUTPUT_PRINT.PREVIEW_MESSAGE;
-    Console.print(MONTH + `${visitDate}` + MESSAGE);
-  },
 
-  formatPrice(price) {
-    const PriceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return `${PriceWithCommas}원`;
+    Console.print(`${MONTH}${visitDate}${MESSAGE}`);
   },
 
   printTotalPriceBeforeDiscount(price) {
@@ -28,21 +36,21 @@ const OutputView = {
     Console.print(this.formatPrice(price));
   },
 
-  printGiftMenu(giftMenuResult) {
+  printGiftMenu(giftMenu) {
     Console.print('\n' + OUTPUT_PRINT.GIFT_MENU_TITLE);
 
-    if (giftMenuResult === null) {
+    if (giftMenu === null) {
       Console.print(OUTPUT_PRINT.NO_DATA);
     } else {
-      Console.print(`${giftMenuResult} 1개`);
+      Console.print(`${giftMenu} 1개`);
     }
   },
 
-  printBenefitDetail(benefitDetailResult, totalBenefitsAmountResult) {
+  printBenefitDetail(benefitDetail, totalBenefitsAmount) {
     Console.print('\n' + OUTPUT_PRINT.BENEFIT_EVENT_DETAIL_TITLE);
 
-    if (totalBenefitsAmountResult !== 0) {
-      this.printEventDiscountContent(benefitDetailResult);
+    if (totalBenefitsAmount !== 0) {
+      this.printEventDiscountContent(benefitDetail);
     } else {
       Console.print(OUTPUT_PRINT.NO_DATA);
     }
@@ -50,37 +58,45 @@ const OutputView = {
 
   formatEventName(eventName) {
     const eventNames = {
-      christmasDdayEvent: BENEFIT_EVENT_NAME.CHRISTMAS_DDAY,
-      weekdayEvent: BENEFIT_EVENT_NAME.WEEKDAY,
-      weekendEvent: BENEFIT_EVENT_NAME.WEEKEND,
-      specialEvent: BENEFIT_EVENT_NAME.SPECIAL,
-      giftEvent: BENEFIT_EVENT_NAME.GIFT,
+      ChristmasDdayEvent: BENEFIT_EVENT_NAME.CHRISTMAS_DDAY,
+      WeekdayEvent: BENEFIT_EVENT_NAME.WEEKDAY,
+      WeekendEvent: BENEFIT_EVENT_NAME.WEEKEND,
+      SpecialEvent: BENEFIT_EVENT_NAME.SPECIAL,
+      GiftEvent: BENEFIT_EVENT_NAME.GIFT,
     };
 
     return eventNames[eventName];
   },
 
-  printEventDiscountContent(benefitDetailResult) {
-    for (const [eventName, discount] of Object.entries(benefitDetailResult)) {
+  printEventDiscountContent(benefitDetail) {
+    for (const [eventName, discount] of Object.entries(benefitDetail)) {
       if (discount === 0) continue;
 
-      Console.print(this.formatEventName(eventName) + '-' + this.formatPrice(discount));
+      Console.print(`${this.formatEventName(eventName)}-${this.formatPrice(discount)}`);
     }
   },
 
-  printTotalBenefitsAmount(totalBenefitsAmountResult) {
+  printTotalBenefitsAmount(totalBenefitsAmount) {
     Console.print('\n' + OUTPUT_PRINT.TOTAL_BENEFITS_AMOUNT_TITLE);
-    Console.print('-' + this.formatPrice(totalBenefitsAmountResult));
+    const formattedAmount =
+      (totalBenefitsAmount !== 0 ? '-' : '') + `${this.formatPrice(totalBenefitsAmount)}`;
+    Console.print(formattedAmount);
   },
 
-  printFinalExpectPrice(finalExpectPriceResult) {
+  printFinalExpectPrice(finalExpectPrice) {
     Console.print('\n' + OUTPUT_PRINT.FINAL_EXPECT_PRICE_TITLE);
-    Console.print(this.formatPrice(finalExpectPriceResult));
+    Console.print(this.formatPrice(finalExpectPrice));
   },
+
   printEventBadge(eventBadge) {
     Console.print('\n' + OUTPUT_PRINT.EVENT_BADGE_TITLE);
 
-    Console.print(eventBadge);
+    Console.print(eventBadge || OUTPUT_PRINT.NO_DATA);
+  },
+
+  formatPrice(price) {
+    const PriceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return `${PriceWithCommas}원`;
   },
 };
 

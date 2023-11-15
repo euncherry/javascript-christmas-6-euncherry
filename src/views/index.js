@@ -1,4 +1,4 @@
-import OutputView from './OutputView.js';
 import InputView from './InputView.js';
+import OutputView from './OutputView.js';
 
-export { OutputView, InputView };
+export { InputView, OutputView };

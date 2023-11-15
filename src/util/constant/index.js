@@ -24,6 +24,14 @@ const ERROR_MESSAGE = {
   INVALID_ORDER_MENU: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.\n',
 };
 
+const ATTENTION_MESSAGE = {
+  TITLE: '❗️이벤트 주의사항',
+  MINIMUM_EVENT_AMOUNT: '총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.',
+  DRINK_ONLY_ORDER: '음료만 주문 시, 주문할 수 없습니다.',
+  MAXIMUM_ORDER_LIMIT:
+    '메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.\n(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)',
+};
+
 const OUTPUT_PRINT = {
   WELCOME_MESSAGE: '안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.',
   PREVIEW_MESSAGE: ['12월 ', '일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!'],
@@ -52,6 +60,8 @@ const D_DAY_EVENT = {
   DISCOUNT_ADDITIONAL_PRICE: 100,
   MIN_EVENT_TOTAL_PRICE: 10000,
 };
+
+const GIFT_MENU_NAME = '샴페인';
 
 const GIFT_EVENT = {
   START_DATE: 1,
@@ -100,9 +110,11 @@ export {
   OUTPUT_PRINT,
   BENEFIT_EVENT_NAME,
   D_DAY_EVENT,
+  GIFT_MENU_NAME,
   GIFT_EVENT,
   WEEKDAY_EVENT,
   WEEKEND_EVENT,
   SPECIAL_EVENT,
   BADGE_INFO,
+  ATTENTION_MESSAGE,
 };

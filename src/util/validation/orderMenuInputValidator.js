@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constant/index.js';
+import { ERROR_MESSAGE, ATTENTION_MESSAGE } from '../constant/index.js';
 
 const orderMenuInputValidator = {
   format(rawInput) {
@@ -36,22 +36,23 @@ const orderMenuInputValidator = {
       totalCount += orderCount;
       totalType.add(menuListNameType[orderName]);
     }
-    return { totalCount, totalType };
+    return { type: totalType, counts: totalCount };
   },
 
   validateTotalOrder(orderMenuMap, menuArray) {
     const menuListNameType = this.getMenuListNameType(menuArray);
-    const { totalCount, totalType } = this.calculateTotalCounts(
-      orderMenuMap,
-      menuListNameType
-    );
+    const { type, counts } = this.calculateTotalCounts(orderMenuMap, menuListNameType);
 
-    if (totalType.has('음료') && totalType.size === 1) {
-      throw new Error(ERROR_MESSAGE.INVALID_ORDER_MENU);
+    if (type.has('음료') && type.size === 1) {
+      throw new Error(
+        ERROR_MESSAGE.INVALID_ORDER_MENU + ATTENTION_MESSAGE.DRINK_ONLY_ORDER + '\n',
+      );
     }
 
-    if (totalCount > 20) {
-      throw new Error(ERROR_MESSAGE.INVALID_ORDER_MENU);
+    if (counts > 20) {
+      throw new Error(
+        ERROR_MESSAGE.INVALID_ORDER_MENU + ATTENTION_MESSAGE.MAXIMUM_ORDER_LIMIT + '\n',
+      );
     }
   },
 
@@ -64,7 +65,7 @@ const orderMenuInputValidator = {
       const { orderName, orderCount } = this.validateOrder(
         order,
         orderMenuMap,
-        menuListName
+        menuListName,
       );
 
       orderMenuMap.set(orderName, orderCount);
